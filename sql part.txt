@@ -1,0 +1,30 @@
+-- Create the partitions table
+CREATE TABLE partitions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    size INT NOT NULL,
+    allocated BOOLEAN DEFAULT FALSE
+);
+
+-- Create the jobs table
+CREATE TABLE jobs (
+    job_id INT AUTO_INCREMENT PRIMARY KEY,
+    job_size INT NOT NULL,
+    allocated_partition INT,
+    FOREIGN KEY (allocated_partition) REFERENCES partitions(id)
+);
+
+-- Inserting 5 different partition sizes
+INSERT INTO partitions (size, allocated) VALUES
+(25, FALSE),
+(35, FALSE),
+(40, FALSE),
+(40, FALSE),
+(30, FALSE);
+
+-- Inserting 5 different job sizes
+INSERT INTO jobs (job_size, allocated_partition) VALUES
+(20, NULL),
+(10, NULL),
+(30, NULL),
+(25, NULL),
+(20, NULL);
